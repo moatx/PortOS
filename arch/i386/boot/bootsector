@@ -1,0 +1,53 @@
+the boot sector is a sector of a persistent data storage device which contains machine code to be loaded into random-access memory (RAM) and then executed by a computer system's built-in firmware (BIOS). 
+
+BIOS doesn't know how to load the OS, so it delegates that task to the boot sector. 
+the location for the boot sector will be the first sector of the disk and it will takes 512 bytes.
+
+in the bootsect it enters protected mode and executes the elf loader to load the elf kernel
+
+boot process:
+  1. clear interrupts
+  2. enable A20 line
+  3. setup stack
+  4. load the gdt
+  5. switches on the cr0 bit
+  6. does a long jump to a 32 bit protected mode labele start32
+  7. setup segment registers for 32 bit
+  8. calls the elf loader
+
+DETAILS:
+
+  1. clear interrupts:
+      bios has interuppts which are being called like the disks motor will turn off or it will reboot
+
+  2. enable A20 line
+      the A20 line is physical representation of the 21st bit (number 20, counting from 0) of any memory access. this is because the first PCs 
+      with 2 MB of memory would run software that assumed 1 MB.
+
+  4. load the gdt
+      the gdt contains entries telling the CPU about memory segments. the gdt is a flat model meaning that the base of the gdt data segment is 0.
+
+      TODO: 
+      details about the gdt:
+            the code and data segment in first db will have:
+                a base of 0x0 and a limit of 0xffff
+                the present bit which is to tell the gdt if the segment is present in memory will be set to 1
+                privilige bit that tells the gdt the privilge level will be set to 0 for highest privilege
+             code segment will have:
+                a descriptor type which is to tell the gdt if the segment is code or data will be set to 1 for code
+
+
+
+                
+                
+
+      
+
+
+      
+
+
+
+      
+      
+  
