@@ -25,16 +25,61 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/* WIP: needs to be checked */
+/*#define KOFFSET 0x1000 */
+.set KOFFSET, 0x1000
+
 .code16 /* excute code as 16 bit instructions */
+/*
+write:
+    movb (%bx), %al
+    cmp $0, %al
+    je write_done
+  
+    movb $0x0e, %ah
+    mov $0, %bh 
+    int $0x10
+    add $1, %bx
+    jmp write
+ 
+write_done:
+    ret
+ 
+ 
+ 
+write_nl:
+ 
+    mov $0x0e, %ah
+    mov $0x0a, %al
+    int $0x10
+    mov $0x0d, %al
+    int $0x10
+
+    ret
+*/
+
 .global start 
 start: 
-
+  
   /* clear intruppts and descriptors to not have any problems */
 
   cli
   cld
   
   movw	$start,%sp         	
+
+/*
+  mov MSG_REAL_LOADED, %bx
+  call write
+*/
+/*
+mov $0x0e,  %ah
+mov 'H', %al
+int $0x10
+  loop:
+	jmp loop
+*/
+  
 
 
 /* enable the a20 line for 20th bit */
@@ -101,6 +146,7 @@ gdtdescr:
     .long gdt_start
 
 .code32
+
 start32:
   /* setup 32 bit segment registers */
   movw $10, %ax
@@ -110,9 +156,41 @@ start32:
   movw %ax, %gs
   movw %ax, %ss
 
-  call loader /* Give control to the loader */
+  call KOFFSET
+
   /* should not return but if it does lets have a infinite loop */
 
 plooper:
 	jmp plooper
 
+/*
+write:
+    movb (%bx), %al
+    cmp $0, %al
+    je write_done
+
+    movb $0x0e, %ah
+    mov $0, %bh
+    int $0x10 
+    add $1, %bx 
+    jmp write
+
+write_done:
+    ret
+
+
+
+write_nl:
+    
+    mov $0x0e, %ah
+    mov $0x0a, %al
+    int $0x10
+    mov $0x0d, %al
+    int $0x10
+    
+    ret
+*/
+
+/* MESSAGES */
+.data
+MSG_REAL_LOADED: .asciz "loaded in 16 bit real mode \n \r"

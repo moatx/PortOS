@@ -1,8 +1,0 @@
-A elf loader is a loader that loads a elf executable.
-the elf executable that this elf loader will load will be the kernel.
-
-loader process:
-  1. check if theres a elf executable
-
-DETAILS:
-  

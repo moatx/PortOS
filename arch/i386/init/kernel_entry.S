@@ -24,9 +24,11 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
+.global _start
 .extern main 
-call main 
+
+_start:
+	call main 
 
 /* main shouldnt return but if it does loop */
 loop:

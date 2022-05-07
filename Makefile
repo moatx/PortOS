@@ -2,19 +2,20 @@
 
 include config.mk
 
-base.img: bootblock 
+base.img: bootblock kernel
 	dd if=/dev/zero of=base.img count=10000
 	dd if=bootblock of=base.img conv=notrunc
-	#dd if=kernel of=base.img seek=1 conv=notrunc
+	dd if=kernel of=base.img seek=1 conv=notrunc
 
-bootblock: ./arch/i386/boot/bootsect.S ./arch/i386/boot/loader.c  
+bootblock: ./arch/i386/boot/bootsect.S 
 	cd ./arch/i386 && make && cd ../../
 	$(OBJCOPY) -S -O binary ./arch/i386/boot/bootblock.o $@
 	sh sign.sh $@
 
 kernel:
 	cd ./kern/ && make && cd ..
-	$(LD) -o $@ -Ttext 0x1000 ./kern/*.o
+	$(AS) -c ./arch/i386/init/kernel_entry.S -o ./kern/kernel_entry.o
+	$(LD) -o $@ -Ttext 0x1000 ./kern/*.o --oformat binary
 
 
 .PHONY: clean 
