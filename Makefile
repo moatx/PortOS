@@ -7,7 +7,7 @@ base.img: bootblock kernel
 	dd if=bootblock of=base.img conv=notrunc
 	dd if=kernel of=base.img seek=1 conv=notrunc
 
-bootblock: ./arch/i386/boot/bootsect.S 
+bootblock: ./arch/i386/boot/boot.S 
 	cd ./arch/i386 && make && cd ../../
 	$(OBJCOPY) -S -O binary ./arch/i386/boot/bootblock.o $@
 	sh sign.sh $@

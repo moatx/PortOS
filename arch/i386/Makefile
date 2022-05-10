@@ -3,8 +3,8 @@
 include ../../config.mk
 
 boot/bootblock.o: 
-	$(AS) -I ./include -c ./boot/bootsect.S -o ./boot/bootsect.o
-	$(LD) -N -e start -Ttext 0x7C00 -o $@ ./boot/bootsect.o 
+	$(AS) -I ./include -c ./boot/boot.S -o ./boot/boot.o
+	$(LD) -N -e start -Ttext 0x7C00 -o $@ ./boot/boot.o 
 
 
 
