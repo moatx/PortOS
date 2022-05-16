@@ -8,11 +8,13 @@ main(void)
    * Attempt to find console and initialize
    * in case of early panic or other messages.
    */
-   consinit();
+  consinit();
 
-   printf("starting init process\n");
+  printf("starting init process \n");
+
   /* infinte loop to not return */
   for(;;);
+
   /*NOTREACHED*/
 }
 

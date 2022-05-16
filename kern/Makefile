@@ -1,7 +1,7 @@
 include ../config.mk
 
 all:
-	$(CC) $(CFLAGS) -I ../arch/i386/include -c ./*.c ../arch/i386/lib/console.c ../arch/i386/cpu/cpu.S
+	$(CC) $(CFLAGS) -I ../arch/i386/include -c ./*.c ../arch/i386/i386/console.c ../arch/i386/i386/cpu.S
 	
 
 .PHONY: clean all
