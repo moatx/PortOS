@@ -14,7 +14,7 @@ bootblock: ./arch/i386/boot/boot.S
 
 kernel:
 	cd ./kern/ && make && cd ..
-	$(AS) -c ./arch/i386/init/kernel_entry.S -o ./kern/kernel_entry.o
+	$(AS) -c ./arch/i386/boot/kernel_entry.S -o ./kern/kernel_entry.o
 	$(LD) -o $@ -Ttext 0x1000 ./kern/*.o --oformat binary
 
 
