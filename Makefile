@@ -2,24 +2,29 @@
 
 include config.mk
 
-base.img: bootblock kernel
+base.img: 
 	dd if=/dev/zero of=base.img count=10000
-	dd if=bootblock of=base.img conv=notrunc
-	dd if=kernel of=base.img seek=1 conv=notrunc
+	dd if=./compile/bootblock of=base.img conv=notrunc
+	dd if=./compile/kernel of=base.img seek=1 conv=notrunc
 
-bootblock: ./arch/i386/boot/boot.S 
-	cd ./arch/i386 && make && cd ../../
-	$(OBJCOPY) -S -O binary ./arch/i386/boot/bootblock.o $@
-	sh sign.sh $@
-
-kernel:
-	cd ./kern/ && make && cd ..
-	$(AS) -c ./arch/i386/boot/kernel_entry.S -o ./kern/kernel_entry.o
-	$(LD) -o $@ -Ttext 0x1000 ./kern/*.o --oformat binary
+#bootblock: ./arch/i386/boot/boot.S 
+#	cd ./arch/i386 && make && cd ../../
+#	$(OBJCOPY) -S -O binary ./arch/i386/boot/bootblock.o $@
+#	sh sign.sh $@
+#
+#kernel:
+#	cd ./kern/ && make && cd ..
+#	$(AS) -c ./arch/i386/boot/kernel_entry.S -o ./kern/kernel_entry.o
+#	$(LD) -o $@ -Ttext 0x1000 ./kern/*.o --oformat binary
 
 
 .PHONY: clean 
+
+#clean:
+#	@cd ./arch/i386 && make clean && cd ../../
+#	@cd ./kern && make clean && cd ../../
+#	@rm -f base.img bootblock kernel
+
 clean:
-	@cd ./arch/i386 && make clean && cd ../../
-	@cd ./kern && make clean && cd ../../
-	@rm -f base.img bootblock kernel
+	@rm base.img
+	@rm ./compile/*

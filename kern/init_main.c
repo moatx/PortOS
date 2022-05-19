@@ -10,7 +10,9 @@ main(void)
    */
   consinit();
 
+/*
   printf("starting init process \n");
+*/
 
   /* infinte loop to not return */
   for(;;);

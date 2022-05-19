@@ -15,3 +15,5 @@ CFLAGS := -O3 --std=c89 -pedantic  -nostdinc -ansi -lgcc -Wall -Wextra -Werror -
 # cc linker flags
 CLFLAGS := -I $(ARCH)/include 
 
+COMPILE := $PWD/compile
+

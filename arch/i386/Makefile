@@ -2,9 +2,9 @@
 
 include ../../config.mk
 
-boot/bootblock.o: 
-	$(AS) -I ./include -c ./boot/boot.S -o ./boot/boot.o
-	$(LD) -N -e _start -Ttext 0x7C00 -o $@ ./boot/boot.o 
+all:
+	cd boot && make && cd ..
+	cd i386 && make && cd ..
 
 
 
