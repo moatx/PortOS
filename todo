@@ -1,4 +1,6 @@
+sign bootloader in asm 
 arm bootloader
 fix build system
 gpio driver
 multiboot support
+make docs

@@ -1,9 +1,9 @@
 include ../config.mk
 
 all:
-	$(CC) $(CFLAGS) -I ../include -c subr_cons.c -o ../compile/cons.o
-	$(CC) $(CFLAGS) -I ../include -c init_main.c -o ../compile/init_main.o
-	$(LD) -o ../compile/kernel -Ttext 0x1000 ../compile/cons.o ../compile/cpu_console.o ../compile/cpu.o ../compile/init_main.o --oformat binary
+	$(CC) $(CFLAGS) -I ../include -c subr_cons.c -o $(OBJDIR)/cons.o
+	$(CC) $(CFLAGS) -I ../include -c init_main.c -o $(OBJDIR)/init_main.o
+	$(LD) -o $(OBJDIR)/kernel -Ttext 0x1000 $(OBJDIR)/cons.o $(OBJDIR)/cpu_console.o $(OBJDIR)/cpu.o $(OBJDIR)/init_main.o --oformat binary
 
 
 .PHONY: clean all

@@ -4,8 +4,8 @@ include config.mk
 
 base.img: 
 	dd if=/dev/zero of=base.img count=10000
-	dd if=./compile/bootblock of=base.img conv=notrunc
-	dd if=./compile/kernel of=base.img seek=1 conv=notrunc
+	dd if=$(OBJDIR)/bootblock of=base.img conv=notrunc
+	dd if=$(OBJDIR)/kernel of=base.img seek=1 conv=notrunc
 
 #bootblock: ./arch/i386/boot/boot.S 
 #	cd ./arch/i386 && make && cd ../../
@@ -26,5 +26,4 @@ base.img:
 #	@rm -f base.img bootblock kernel
 
 clean:
-	@rm base.img
-	@rm ./compile/*
+	@rm -f base.img
