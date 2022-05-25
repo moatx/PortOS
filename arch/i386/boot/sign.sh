@@ -1,5 +1,3 @@
-#	$BASE style.c,v 0.0 2021/07/07 03:50:30 moatx Exp $		
-
 #!/bin/sh
 
 FILESIZE="$(wc -c < "$1" | tr -d "")"

@@ -1,6 +1,14 @@
-sign bootloader in asm 
-arm bootloader
-fix build system
-gpio driver
 multiboot support
-make docs
+make docs (gdt)
+get console running
+
+bbb:
+	arm bootloader
+	gpio driver
+
+
+investigate:
+	sign bootloader in asm 
+	mbr bootloader
+
+

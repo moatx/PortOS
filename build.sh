@@ -15,26 +15,27 @@ _usage_
 }
 
 makeobjdir() {
-	[ -z $oarg ] && usage
-	[ ! -d $oarg ] && mkdir $oarg
-	OBJDIR=$(readlink -f $oarg)
-	echo $OBJDIR
+	[ -z "$oarg" ] && usage
+	[ ! -d "$oarg" ] && mkdir "$oarg"
+	OBJDIR=$(readlink -f "$oarg")
+	echo "$OBJDIR"
 	echo
 }
 
 build_i386 () {
-	cd arch/i386 && make OBJDIR=$OBJDIR && cd ../..
-	cd kern && make OBJDIR=$OBJDIR && cd ..
-	make OBJDIR=$OBJDIR
+	cd arch/i386 && make OBJDIR="$OBJDIR" && cd ../..
+	cd kern && make OBJDIR="$OBJDIR" && cd ..
+	make OBJDIR="$OBJDIR"
 }
 
 main () {
-	[ -z $1 ] && usage
+	[ -z "$1" ] && usage
 
 	while getopts o: args
 	do
         	case $args in
-                        o)      oarg=$OPTARG;;
+                        o)      oarg="$OPTARG";;
+			*)	usage;;
 		esac
 	done
                   
