@@ -14,7 +14,8 @@ _usage_
 	exit 1
 }
 
-makeobjdir() {
+
+makeobjdir () {
 	[ -z "$oarg" ] && usage
 	[ ! -d "$oarg" ] && mkdir "$oarg"
 	OBJDIR=$(readlink -f "$oarg")
@@ -30,7 +31,7 @@ build_i386 () {
 
 main () {
 	[ -z "$1" ] && usage
-
+	
 	while getopts o: args
 	do
         	case $args in
@@ -52,6 +53,12 @@ main () {
 			;;
 	esac
 	
+	#clean up
+	rm -r $oarg
+
+	echo "#############################################################################"	
+
+	echo "dont forget to make clean"
 }
 
 

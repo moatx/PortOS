@@ -1,6 +1,7 @@
 multiboot support
 make docs (gdt)
 get console running
+build.sh remake
 
 bbb:
 	arm bootloader

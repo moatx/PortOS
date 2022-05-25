@@ -1,22 +1,19 @@
-#include <console.h>
 #include <cpu.h>
 
-#define VGA_WIDTH 80
 #define cons_buf (volatile char*)0xB8000
 #define black 0x07
-#define newline() (char_loc = char_loc + (160 - (char_loc % 160))) /* 160 is the line size (the result of 80 collums * element and each element takes 2 bytes (bytes for each elements)); line size - char location % line size (to find the length) + char location */
 
-unsigned int char_loc = 0; /* the reason why this is global is because if its local all the stored data will be lost when the function returns, and that means it'll print the new char in the same place the old char is not next to it */
+void cpu_consinit(void);
+void disable_cursor(void);
+void write_char(const char* str, int color);
+volatile char* txt;
+unsigned int l = 0;
 
 void 
 cpu_consinit(void)
 {
     int j = 0;
-    volatile char* txt = cons_buf;
-
-    /* disable the cursor for now */
-    outb(0x3D4, 0x0A);
-    outb(0x3D5, 0x20);
+    txt = cons_buf;
 
     /* there are 25 lines each of 80 columns; each element takes 2 bytes */
     while(j < 80 * 25 * 2) {
@@ -25,11 +22,24 @@ cpu_consinit(void)
         j = j + 2;
 }
 }
-/*
-void
-write_char(uint8_t ch, uint8_t color, int x, int y)
-{
-    volatile char* txt = cons_buf + (y * 80 + x);
 
+void
+disable_cursor(void)
+{
+	outb(0x3D4, 0x0A);
+	outb(0x3D5, 0x20);
 }
-*/
+
+/* WIP */
+void
+write_char(const char* str, int color)
+{
+    /*volatile char* txt = cons_buf + (y * 80 + x);*/
+    unsigned int f = 0;
+    while (str[f] != '\0'){
+    txt[l++] = str[f];
+    txt[l++] = color;
+    ++f;
+    }
+}
+
