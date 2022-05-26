@@ -34,7 +34,7 @@ disable_cursor(void)
 void
 write_char(const char* str, int color)
 {
-    /*volatile char* txt = cons_buf + (y * 80 + x);*/
+    volatile char* txt = cons_buf + (y * 80 + x);
     unsigned int f = 0;
     while (str[f] != '\0'){
     txt[l++] = str[f];
