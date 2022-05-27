@@ -2,6 +2,9 @@ multiboot support
 make docs (gdt)
 get console running
 build.sh remake
+interuppert support
+user space support
+custom core utils (to learn unix)
 
 bbb:
 	arm bootloader
