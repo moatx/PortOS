@@ -24,6 +24,7 @@ makeobjdir () {
 }
 
 build_i386 () {
+	make clean
 	cd arch/i386 && make OBJDIR="$OBJDIR" && cd ../..
 	cd kern && make OBJDIR="$OBJDIR" && cd ..
 	make OBJDIR="$OBJDIR"

@@ -1,18 +1,18 @@
-multiboot support
+multi-boot support
 make docs (gdt)
-get console running
-build.sh remake
-interuppert support
+get console running (partially done)
+build.sh remake + make it remove the build dir if an error occurred
+interrupter support
 user space support
 custom core utils (to learn unix)
 
-bbb:
-	arm bootloader
+BBB:
+	arm boot-loader
 	gpio driver
 
 
 investigate:
-	sign bootloader in asm 
-	mbr bootloader
+	sign boot-loader in asm 
+	mbr boot-loader
 
 

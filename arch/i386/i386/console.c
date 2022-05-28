@@ -6,14 +6,12 @@
 void cpu_consinit(void);
 void disable_cursor(void);
 void write_char(const char* str, int color);
-volatile char* txt;
-unsigned int l = 0;
 
 void 
 cpu_consinit(void)
 {
     int j = 0;
-    txt = cons_buf;
+    volatile char* txt = cons_buf;
 
     /* there are 25 lines each of 80 columns; each element takes 2 bytes */
     while(j < 80 * 25 * 2) {
@@ -34,8 +32,9 @@ disable_cursor(void)
 void
 write_char(const char* str, int color)
 {
-    volatile char* txt = cons_buf + (y * 80 + x);
+    volatile char* txt = cons_buf; /*+ (y * 80 + x);*/
     unsigned int f = 0;
+    unsigned int l = 0;
     while (str[f] != '\0'){
     txt[l++] = str[f];
     txt[l++] = color;

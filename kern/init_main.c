@@ -13,6 +13,8 @@ main(void)
 /*
   printf("starting init process \n");
 */
+  dputs("starting init process");
+  dputs("LOL");
 
   /* infinte loop to not return */
   for(;;);
