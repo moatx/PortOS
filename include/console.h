@@ -1,5 +1,5 @@
 #ifndef _CONSOLE_H_
 #define _CONSOLE_H_
 void consinit(void);
-void dputs(const char* str);
+void printf(const char *);
 #endif /* _CONSOLE_H_ */

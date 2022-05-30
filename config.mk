@@ -1,4 +1,4 @@
-ARCH=arch/i386
+#ARCH=arch/i386
 
 TOOLPREFIX := i386-elf-
 
@@ -13,5 +13,5 @@ OBJDUMP := $(TOOLPREFIX)objdump
 CFLAGS := -O3 --std=c89 -pedantic  -nostdinc -ansi -lgcc -Wall -Wextra -Werror -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-declarations -Wdeclaration-after-statement -ffreestanding -Wduplicated-cond  -Wduplicated-branches  -Wlogical-op  -Wrestrict  -Wnull-dereference  -Wjump-misses-init  -Wdouble-promotion  -Wshadow -Wfloat-equal -Wundef  -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-declarations  -Wdeclaration-after-statement -Wno-deprecated-declarations 
 
 # cc linker flags
-CLFLAGS := -I $(ARCH)/include 
+CLFLAGS := -I $(CPU)/include 
 

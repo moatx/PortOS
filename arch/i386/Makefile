@@ -6,7 +6,8 @@ all:
 	cd boot && make && cd ..
 	cd i386 && make && cd ..
 
-
+knfmt:
+	knfmt -i ./*/*.c
 
 
 .PHONY: clean

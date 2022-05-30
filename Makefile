@@ -2,28 +2,23 @@
 
 include config.mk
 
-PortOS.img: 
+all: 
 	dd if=/dev/zero of=PortOS.img count=10000
 	dd if=$(OBJDIR)/bootblock of=PortOS.img conv=notrunc
 	dd if=$(OBJDIR)/kernel of=PortOS.img seek=1 conv=notrunc
 
-#bootblock: ./arch/i386/boot/boot.S 
-#	cd ./arch/i386 && make && cd ../../
-#	$(OBJCOPY) -S -O binary ./arch/i386/boot/bootblock.o $@
-#	sh sign.sh $@
-#
-#kernel:
-#	cd ./kern/ && make && cd ..
-#	$(AS) -c ./arch/i386/boot/kernel_entry.S -o ./kern/kernel_entry.o
-#	$(LD) -o $@ -Ttext 0x1000 ./kern/*.o --oformat binary
 
+knfmt:
+	cd ./arch/i386 && make knfmt && cd ../..
+	cd ./kern && make knfmt && cd ..
 
-.PHONY: clean 
+test:
+	qemu-system-i386                                 \
+  	-accel kvm 					\
+  	-no-reboot                                     \
+    	-serial stdio                                  \
+  	-drive format=raw,file=PortOS.img 	
 
-#clean:
-#	@cd ./arch/i386 && make clean && cd ../../
-#	@cd ./kern && make clean && cd ../../
-#	@rm -f base.img bootblock kernel
-
+.PHONY: clean all knfmt test
 clean:
 	@rm -f PortOS.img

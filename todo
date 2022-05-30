@@ -1,8 +1,11 @@
 multi-boot support
 make docs (gdt)
 get console running (partially done)
+add VA to printf
+serial driver for debugging
 build.sh remake + make it remove the build dir if an error occurred
 interrupter support
+try netbsd current lint
 user space support
 custom core utils (to learn unix)
 

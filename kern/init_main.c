@@ -2,24 +2,15 @@
 
 /* XXX return int, so gcc -Werror won't complain */
 int
-main(void) 
+main(void)
 {
-  /*
-   * Attempt to find console and initialize
-   * in case of early panic or other messages.
-   */
-  consinit();
+	consinit();
 
-/*
-  printf("starting init process \n");
-*/
-  dputs("starting init process");
-  dputs("LOL");
-
+	printf("starting init process\n");
+	printf("testing \n");
   /* infinte loop to not return */
-  for(;;);
+	for (;;)
+		;
 
   /*NOTREACHED*/
 }
-
-

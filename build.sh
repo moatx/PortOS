@@ -1,6 +1,6 @@
 #! /usr/bin/env sh
 
-oarg=
+oarg="build"
 OBJDIR=
 
 usage() {
@@ -25,8 +25,8 @@ makeobjdir () {
 
 build_i386 () {
 	make clean
-	cd arch/i386 && make OBJDIR="$OBJDIR" && cd ../..
-	cd kern && make OBJDIR="$OBJDIR" && cd ..
+	cd arch/i386 && make OBJDIR="$OBJDIR" CPU=i386 && cd ../..
+	cd kern && make OBJDIR="$OBJDIR" CPU=i386 && cd ..
 	make OBJDIR="$OBJDIR"
 }
 
@@ -37,7 +37,7 @@ main () {
 	do
         	case $args in
                         o)      oarg="$OPTARG";;
-			*)	usage;;
+			*)	usage	;;
 		esac
 	done
                   
@@ -55,7 +55,7 @@ main () {
 	esac
 	
 	#clean up
-	rm -r $oarg
+	rm -r "$oarg"
 
 	echo "#############################################################################"	
 
