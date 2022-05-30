@@ -1,5 +1,6 @@
 #! /usr/bin/env sh
 
+# defaults
 oarg="build"
 OBJDIR=
 
@@ -17,6 +18,8 @@ _usage_
 
 makeobjdir () {
 	[ -z "$oarg" ] && usage
+	[ "$oarg" == "$(ls -A .)" ] && echo "output directory already exists and is needed for the kernel" && exit 1
+	[ ! -z "$(ls -A "$oarg")" ] && rm -r "$oarg"
 	[ ! -d "$oarg" ] && mkdir "$oarg"
 	OBJDIR=$(readlink -f "$oarg")
 	echo "$OBJDIR"
