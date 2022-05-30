@@ -11,3 +11,4 @@ do not use this to learn how to make an OS portable or how good code looks like,
 ```
 
 # LICENSE 
+see [`LICENSE`](./LICENSE)
