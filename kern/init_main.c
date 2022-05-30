@@ -8,9 +8,9 @@ main(void)
 
 	printf("starting init process\n");
 	printf("testing \n");
-  /* infinte loop to not return */
+	/* infinte loop to not return */
 	for (;;)
 		;
 
-  /*NOTREACHED*/
+	/* NOTREACHED */
 }
