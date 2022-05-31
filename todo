@@ -3,11 +3,9 @@ make docs (gdt)
 get console running (partially done)
 add VA to printf
 serial driver for debugging
-interrupter support
-try netbsd current lint
+interrupt support
 user space support
 fix build.sh
-custom core utils (to learn unix)
 
 BBB:
 	arm boot-loader
@@ -15,7 +13,6 @@ BBB:
 
 
 investigate:
-	sign boot-loader in asm 
 	mbr boot-loader
 
 

@@ -21,7 +21,7 @@ cpu_consinit(void)
 	int j = 0;
 	volatile char *txt = cons_buf;
 
-    /* there are 25 lines each of 80 columns; each element takes 2 bytes */
+	/* there are 25 lines each of 80 columns; each element takes 2 bytes */
 	while (j < MAX_COLS * MAX_ROWS * 2) {
 		txt[j] = ' ';
 		txt[j + 1] = black;
@@ -55,7 +55,6 @@ update_cursor(int y, int x)
 	outb(0x3D4, 15);
 	outb(0x3D5, cursorLocation);
 }
-
 /* WIP */
 /*
 void

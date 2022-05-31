@@ -6,10 +6,8 @@ all:
 	cd boot && make && cd ..
 	cd i386 && make && cd ..
 
-knfmt:
-	knfmt -i ./*/*.c
+indent:
+	cd i386 && make indent && cd ..
 
 
-.PHONY: clean
-clean:
-	@rm -f ./*/*.o
+.PHONY: all indent

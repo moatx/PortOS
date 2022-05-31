@@ -8,13 +8,12 @@ all:
 	dd if=$(OBJDIR)/kernel of=PortOS.img seek=1 conv=notrunc
 
 
-knfmt:
-	cd ./arch/i386 && make knfmt && cd ../..
-	cd ./kern && make knfmt && cd ..
+indent:
+	#cd ./arch/i386 && make indent && cd ../..
+	cd ./kern && make indent && cd ..
 
 test:
 	qemu-system-i386                                 \
-  	-accel kvm 					\
   	-no-reboot                                     \
     	-serial stdio                                  \
   	-drive format=raw,file=PortOS.img 	

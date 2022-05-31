@@ -158,3 +158,7 @@ MSG_CHECK_GDT:	.asciz "loaded the gdt \n \r"
 MSG_CHECK_LOAD: .asciz "in load_kernel \n \r"
 
 MSG_ERROR_JUMP: .asciz "ERROR: did not jump to protected mode \n \r"
+
+.fill (510-(.-_start)) /* fill 510 bytes with 0s */
+BIOS_NUMBER: .word 0xAA55 /* BIOS MAGIC NUMBER */
+
