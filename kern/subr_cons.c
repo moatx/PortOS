@@ -18,8 +18,10 @@ consinit(void)
 {
 	/* restart the cursor */
 	disable_cursor();
+	/*
 	enable_cursor(0, 0);
 	update_cursor(y, x);
+	*/
 	cpu_consinit();
 	enable_cursor(0, 0);
 }
@@ -45,5 +47,5 @@ vprintf(const char *str, int color /* , va_list ap */ )
 		++l;
 	}
 	x = 0;
-	update_cursor(y, x);
+	/*update_cursor(y, x);*/
 }

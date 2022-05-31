@@ -55,21 +55,7 @@ update_cursor(int y, int x)
 	outb(0x3D4, 15);
 	outb(0x3D5, cursorLocation);
 }
-/* WIP */
-/*
-void
-write_char(const char* str, int color, int y, int x)
-{
-    volatile char* txt = cons_buf + (y * 80 + x);
-    unsigned int f = 0;
-    unsigned int l = 0;
-    while (str[f] != '\0'){
-    txt[l++] = str[f];
-    txt[l++] = color;
-    ++f;
-    }
-}
-*/
+
 
 void
 write_char(char c, int color, unsigned int y, unsigned int x)
