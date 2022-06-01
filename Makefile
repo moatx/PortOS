@@ -13,6 +13,7 @@ indent:
 	cd ./kern && make indent && cd ..
 
 test:
+	./build.sh i386
 	qemu-system-i386                                 \
   	-no-reboot                                     \
     	-serial stdio                                  \

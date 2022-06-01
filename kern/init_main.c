@@ -7,7 +7,7 @@ main(void)
 	consinit();
 
 	printf("starting init process\n");
-	printf("testing \n");
+	printf("testing... \n");
 	/* infinte loop to not return */
 	for (;;)
 		;
