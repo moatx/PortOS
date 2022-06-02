@@ -9,7 +9,7 @@ all:
 
 
 indent:
-	#cd ./arch/i386 && make indent && cd ../..
+	cd ./arch/i386 && make indent && cd ../..
 	cd ./kern && make indent && cd ..
 
 test:

@@ -1,7 +1,8 @@
 #ifndef _STDINT_H_
 #define _STDINT_H_
+
 #ifdef i386
-#include "../arch/i386/include/cstdint.h"
+#include "../arch/i386/include/int_types.h"
 #endif /* i386 */
 
 typedef __int8_t int8_t;

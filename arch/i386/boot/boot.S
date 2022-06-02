@@ -4,39 +4,29 @@
 
 .global _start 
 _start: 
-  /* clear intruppts and descriptors to not have any problems */
+  /* clear interuppts to not have any problems */
   cli
-  cld
-
-  mov %dl, BOOT_DRIVE 
-
+  /*cld*/
   mov $MSG_REAL_LOADED, %bx
   call rprint
 
 /* enable the a20 line for 20th bit */
 seta20:
-  1:
-    mov $MSG_CHECK_A201, %bx
-    call rprint
-
-    inb     $0x64,%al               /* wait until its not busy */
-    testb   $0x2,%al
-    jnz     1b
-
-    movb    $0xd1,%al               /* 0xd1 -> port 0x64 */
-    outb    %al,$0x64
-    jmp 1f
-  1:
-    mov $MSG_CHECK_A202, %bx
-    call rprint
-    inb     $0x64,%al               /* Wait until its not busy */
-    testb   $0x2,%al
-    jnz     1f
-
-    movb    $0xdf,%al               /* 0xdf -> port 0x60 */
-    outb    %al,$0x60
+	mov $MSG_CHECK_A201, %bx
+	call rprint
+	
+	call wait_kbd
+	
+	movb    $0xd1, %al               /* 0xd1 -> port 0x64 */
+	outb    %al, $0x64		   /* set command write to keyboard controller bit 1 */
+	
+	call wait_kbd
+	
+	movb    $0xdf, %al               /* 0xdf -> port 0x60 */
+	outb    %al, $0x60		    /* enable A20 line */
 
 load_kernel:
+  	mov %dl, BOOT_DRIVE 
 	mov $0x1000, %bx
         mov $16, %dh
         mov (BOOT_DRIVE), %dl
@@ -115,6 +105,21 @@ gdtdescr:
 .set CODE_SEG, gdt_code - gdt_start
 
 /* FUNCTIONS */
+wait_kbd:
+	/* SLEEP FOR 1 SECOND */
+/*
+	mov $0, %al
+	mov $86, %ah
+	mov $1, %cx
+	mov $2, %dx
+	int $0x15
+*/
+
+    	inb $0x64, %al	/* wait until its not busy */
+    	testb $0x2, %al
+    	jnz wait_kbd
+    	ret
+
 disk_load:
         pusha
 	push %dx

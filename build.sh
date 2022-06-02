@@ -1,7 +1,5 @@
 #! /usr/bin/env sh
 
-# XXX: no -o until I could figure out how to protect from removing neccesary dirs
-
 # defaults
 oarg="build"
 OBJDIR=
@@ -20,7 +18,7 @@ _usage_
 
 makeobjdir () {
 	[ -z "$oarg" ] && usage
-	[ ! -z "$(ls -A "$oarg")" ] && rm -r "$oarg"
+	[ -n "$(ls -A "$oarg")" ] && rm -r "$oarg"
 	[ ! -d "$oarg" ] && mkdir "$oarg"
 	OBJDIR=$(readlink -f "$oarg")
 	echo "$OBJDIR"
@@ -37,20 +35,22 @@ build_i386 () {
 main () {
 	[ -z "$1" ] && usage
 	
-	#while getopts o: args
-	#do
-        #	case $args in
-        #                o)      oarg="$OPTARG";;
-	#		*)	usage	;;
-	#	esac
-	#done
+	while getopts o: args
+	do
+        	case $args in
+                        o)      oarg="$OPTARG";;
+			*)	usage	;;
+		esac
+	done
                   
-	#shift $((OPTIND - 1))
+	shift $((OPTIND - 1))
 
-	#for d in ./*; do
-        #        echo "checking: $d"
-        #        [ "$d" = ./"$oarg" ] && exit
-        #done
+
+	for d in ./*; do
+                echo "checking: $(basename "$d") = $oarg"
+                [ "$(basename "$oarg")" = "$(basename "$d")" ] && exit
+        done
+
 
 
 	makeobjdir
