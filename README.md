@@ -10,7 +10,9 @@ do not use this to learn how to make an OS portable or how good code looks like,
 To build
 --------
 
+```
 ./build.sh [-o objdir] arch
+```
 
 LICENSE 
 -------
