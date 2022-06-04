@@ -1,3 +1,5 @@
+/* XXX XXX TODO: currently trying to make the bootloader work on real hardware */
+
 .set KOFFSET, 0x1000
 
 .code16 /* excute code as 16 bit instructions */
@@ -6,7 +8,8 @@
 _start: 
   /* clear interuppts to not have any problems */
   cli
-  /*cld*/
+  cld
+  movw	$_start,%sp         	
   mov $MSG_REAL_LOADED, %bx
   call rprint
 
@@ -24,6 +27,19 @@ seta20:
 	
 	movb    $0xdf, %al               /* 0xdf -> port 0x60 */
 	outb    %al, $0x60		    /* enable A20 line */
+
+	mov $0x0e, %ah
+	mov 0x104, %al
+	int $0x10
+	mov 'e', %al
+	int $0x10
+	mov 'l', %al
+	int $0x10
+	int $0x10 
+	mov 'o', %al
+	int $0x10
+
+  	jmp .
 
 load_kernel:
   	mov %dl, BOOT_DRIVE 
@@ -155,7 +171,7 @@ rprint:
 BOOT_DRIVE: .byte 0
 
 /* MESSAGES */
-MSG_REAL_LOADED: .asciz "loaded in 16 bit real mode \n \r"
+MSG_REAL_LOADED: .asciz "loaded in 16 bit real mode" /*\n \r"*/
 
 MSG_CHECK_A201: .asciz "in A201 \n \r"
 MSG_CHECK_A202: .asciz "in A202 \n \r"
