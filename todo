@@ -18,5 +18,6 @@ investigate:
 	mbr boot-loader
 	how memory works
 	segmentation (and document it)
+	read about the internals of modern opearting systems
 
 

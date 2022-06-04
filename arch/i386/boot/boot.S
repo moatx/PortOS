@@ -37,7 +37,7 @@ seta20:
 	mov $72, %al
 	int $0x10
 
-  	jmp .
+  	/*jmp .*/
 
 load_kernel:
   	mov %dl, BOOT_DRIVE 
