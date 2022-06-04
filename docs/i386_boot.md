@@ -17,21 +17,21 @@
 
 # boot process
 
-1. clear interrupts
+1. Clear interrupts
 
-2. enable A20 line
+2. Enable A20 line
 
-3. loads the kernel from disk to memory
+3. Load the kernel from disk to memory
 
-4. load the GDT
+4. Load the GDT
 
-5. switches on the cr0 bit
+5. Switch on the cr0 bit
 
-6. does a long jump to a 32 bit protected mode label called _start32
+6. Do a long jump to a 32 bit protected mode label called _start32
 
-7. setup segment registers and stack for 32 bit protected mode
+7. Setup segment registers and stack for 32 bit protected mode
 
-8. jumps to the kernel in memory
+8. Jump to the kernel in memory
 
 # details
 
@@ -65,7 +65,7 @@
 	* The boot-loader needs to do a long jump because _start32 is in protected mode with the gdt loaded, and which means to access _start32 the boot-loader **must** use gdt protected mode code segment offset to jump to _start32.
 
 6. setup segment registers and stack for 32 bit protected mode
-	* the boot-loader needs to setup segment registers with gdt data segment and setup stack to be at 9000 under the kernel because the stack grows down.
+	* The boot-loader needs to setup segment registers with gdt data segment and setup stack to be at 9000 under the kernel because the stack grows down.
 
 8. jump to kernel
 	* Pass control to kernel in kernel space. goodbye boot-loader :)

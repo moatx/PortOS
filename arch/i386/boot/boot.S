@@ -10,6 +10,11 @@ _start:
   cli
   cld
   movw	$_start,%sp         	
+  /*mov %sp, %bp*/ /* probably the reason why stack never works*/
+  xorw    %ax,%ax             
+  movw    %ax,%ds             
+  movw    %ax,%es             
+  movw    %ax,%ss             
   mov $MSG_REAL_LOADED, %bx
   call rprint
 
@@ -29,14 +34,7 @@ seta20:
 	outb    %al, $0x60		    /* enable A20 line */
 
 	mov $0x0e, %ah
-	mov 0x104, %al
-	int $0x10
-	mov 'e', %al
-	int $0x10
-	mov 'l', %al
-	int $0x10
-	int $0x10 
-	mov 'o', %al
+	mov $72, %al
 	int $0x10
 
   	jmp .
@@ -60,8 +58,8 @@ jump2protected:
   orl $0x1, %eax
   movl %eax, %cr0
 
-  /* finnaly long jump into a label in 32 bit protected mode */
-  ljmp $0x08, $_start32
+  /* finnaly long jump into a label in 32 bit protected mode to reload %cs and %eip (inscrution pointer) */
+  ljmp $0x08, $_start32 /* 0x08 is gdt code segment */
 
   mov $MSG_ERROR_JUMP, %bx
   call rprint
@@ -171,7 +169,7 @@ rprint:
 BOOT_DRIVE: .byte 0
 
 /* MESSAGES */
-MSG_REAL_LOADED: .asciz "loaded in 16 bit real mode" /*\n \r"*/
+MSG_REAL_LOADED: .asciz "loaded in 16 bit real mode \n \r"
 
 MSG_CHECK_A201: .asciz "in A201 \n \r"
 MSG_CHECK_A202: .asciz "in A202 \n \r"

@@ -1,0 +1,7 @@
+PortOS will be a fast portable usable hybird elf kernel.
+
+It will follow the System V ABI, and mostly be posix compilant to the extend that porting software becomes easier.
+
+the bootloader will follow boothowto from netbsd. (probably mimic how netbsd boots)
+
+
