@@ -1,4 +1,4 @@
-PortOS will be a fast portable usable secure small hybird elf kernel.
+PortOS will be a fast embeddable portable usable secure small hybird elf kernel that can run on mmu-less systems or systems with mmu.
 
 It will follow the System V ABI, and mostly be posix compilant to the extend that porting software becomes easier.
 
