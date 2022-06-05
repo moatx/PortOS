@@ -5,3 +5,5 @@ It will follow the System V ABI, and mostly be posix compilant to the extend tha
 the bootloader will follow boothowto from netbsd. (probably mimic how netbsd boots)
 
 
+
+inspirations: netbsd, lk, openbsd, plan9/9front, linux
