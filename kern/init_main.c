@@ -6,7 +6,7 @@ main(void)
 {
 	consinit();
 	printf("starting init process...\n");
-	printf("Welcome to PortOS");
+	printf("Welcome to PortOS!");
 	/* infinte loop to not return */
 	for (;;)
 		;

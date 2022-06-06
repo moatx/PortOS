@@ -1,8 +1,9 @@
 urgent:
+	fix cursor bug
+	implement scrolling
+	add VA to printf 	
 	enable the A20 line with a better way and document it (also document more about how the a20 line works)
-	fix newline bug
 	serial driver for debugging
-	add VA to printf (so you could test scrolling)
 
 non-urgent:
 	multi-boot support
