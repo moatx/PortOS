@@ -1,20 +1,23 @@
-/* XXX XXX TODO: currently trying to make the bootloader work on real hardware */
-
 .set KOFFSET, 0x1000
 
 .code16 /* excute code as 16 bit instructions */
 
 .global _start 
 _start: 
+  /* remember boot drive */
+  mov %dl, BOOT_DRIVE 
   /* clear interuppts to not have any problems */
   cli
   cld
   movw	$_start,%sp         	
-  /*mov %sp, %bp*/ /* probably the reason why stack never works*/
+  /*mov %sp, %bp*/ /* probably the reason why stack never works */
+
+  /* set segment registers to 0 */
   xorw    %ax,%ax             
   movw    %ax,%ds             
   movw    %ax,%es             
   movw    %ax,%ss             
+
   mov $MSG_REAL_LOADED, %bx
   call rprint
 
@@ -33,14 +36,7 @@ seta20:
 	movb    $0xdf, %al               /* 0xdf -> port 0x60 */
 	outb    %al, $0x60		    /* enable A20 line */
 
-	mov $0x0e, %ah
-	mov $72, %al
-	int $0x10
-
-  	/*jmp .*/
-
 load_kernel:
-  	mov %dl, BOOT_DRIVE 
 	mov $0x1000, %bx
         mov $16, %dh
         mov (BOOT_DRIVE), %dl
@@ -57,6 +53,7 @@ jump2protected:
   movl %cr0, %eax
   orl $0x1, %eax
   movl %eax, %cr0
+
 
   /* finnaly long jump into a label in 32 bit protected mode to reload %cs and %eip (inscrution pointer) */
   ljmp $0x08, $_start32 /* 0x08 is gdt code segment */
@@ -83,6 +80,7 @@ _start32:
 
   mov $0x90000, %ebp
   mov %ebp, %esp
+
 
   call KOFFSET
 
