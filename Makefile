@@ -15,9 +15,9 @@ indent:
 test:
 	./build.sh i386
 	qemu-system-i386                                 \
-  	-no-reboot                                     \
     	-serial stdio                                  \
   	-drive format=raw,file=PortOS.img 	
+#-no-reboot                                     \
 
 .PHONY: clean all knfmt test
 clean:

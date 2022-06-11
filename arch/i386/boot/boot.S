@@ -1,3 +1,4 @@
+/* XXX: This boot-loader shall not use the stack */
 .set KOFFSET, 0x1000
 
 .code16 /* excute code as 16 bit instructions */
@@ -6,11 +7,10 @@
 _start: 
   /* remember boot drive */
   mov %dl, BOOT_DRIVE 
-  /* clear interuppts to not have any problems */
+
+  /* clear interuppts and descriptors to not have any problems */
   cli
   cld
-  movw	$_start,%sp         	
-  /*mov %sp, %bp*/ /* probably the reason why stack never works */
 
   /* set segment registers to 0 */
   xorw    %ax,%ax             
@@ -118,32 +118,19 @@ gdtdescr:
 
 /* FUNCTIONS */
 wait_kbd:
-	/* SLEEP FOR 1 SECOND */
-/*
-	mov $0, %al
-	mov $86, %ah
-	mov $1, %cx
-	mov $2, %dx
-	int $0x15
-*/
-
+	nop
     	inb $0x64, %al	/* wait until its not busy */
     	testb $0x2, %al
     	jnz wait_kbd
     	ret
 
 disk_load:
-        pusha
-	push %dx
-
         mov $0x02, %ah
         mov %dh, %al
 	mov $0x02, %cl
 	mov $0x00, %ch
 	mov $0x00, %dh
 	int $0x13
-  	pop %dx
-	popa
 	ret
 
 /* real mode print */

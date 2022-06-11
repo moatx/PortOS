@@ -6,4 +6,9 @@ all:
 	$(OBJCOPY) -S -O binary $(OBJDIR)/bootblock.o $(OBJDIR)/bootblock
 	$(AS) -c kernel_entry.S -o $(OBJDIR)/kernel_entry.o
 
-.PHONY: all
+grub:
+	$(AS) -c entry.S -o $(OBJDIR)/entry.o
+	$(OBJCOPY) -S -O binary $(OBJDIR)/kernel_entry.o $(OBJDIR)/bootblock
+
+
+.PHONY: all grub

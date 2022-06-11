@@ -3,11 +3,15 @@
 include ../../config.mk
 
 all:
-	cd boot && make && cd ..
-	cd i386 && make && cd ..
+	make -C i386
+	make -C boot
+
+#grub:
+#	make -C boot grub
+#	make -C i386
 
 indent:
-	cd i386 && make indent && cd ..
+	make -C i386 indent
 
 
-.PHONY: all indent
+.PHONY: all indent grub

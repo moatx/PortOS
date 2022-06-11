@@ -1,5 +1,5 @@
 PortOS
-------
+======
 
 A small hobby unix-like os that TRIES to be portable, which means it'll hopefully be easy to port this to a multitude of architectures. 
 
@@ -10,11 +10,9 @@ do not use this to learn how to make an OS portable or how good code looks like,
 To build
 --------
 
-```
 ./build.sh [-o objdir] arch
-```
 
 LICENSE 
 -------
 
-see [LICENSE](./LICENSE)
+see LICENSE 

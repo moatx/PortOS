@@ -21,11 +21,8 @@ void
 consinit(void)
 {
 	consinit_helper();
-	/* restart cursor */
-	/*
-	disable_cursor();
-	*/
-	enable_cursor(cursor_y, cursor_y);
+	/* disable the cursor for now */
+	/*disable_cursor();*/
 }
 
 void
@@ -44,8 +41,10 @@ void
 printf(const char *fmt)
 {
 	printf_core(fmt, black);
-	scroll();
 	update_cursor(cursor_y, cursor_x);
+	/*
+	scroll();
+	*/
 }
 
 void

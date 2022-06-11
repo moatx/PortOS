@@ -1,24 +1,13 @@
-urgent:
-	fix cursor bug
-	implement scrolling
-	add VA to printf 	
-	enable the A20 line with a better way and document it (also document more about how the a20 line works)
-	serial driver for debugging
-
-non-urgent:
-	multi-boot support
-	interrupt support
-	user space support
-	arm boot-loader 
-	gpio driver for bbb
-	print color (printc) that prints text with color attributes
-	make docs (gdt) (vga) (partially done)
-
-
-investigate:
-	mbr boot-loader
-	how memory works
-	segmentation (and document it)
-	read about the internals of modern opearting systems
-
-
+fix cursor bug
+use a linker script
+implement scrolling
+add VA to printf
+make printf be able to print ints after VA
+enable the A20 line with a better way and document it (also document more about how the a20 line works)
+serial driver for debugging
+multi-boot support (grub)
+interrupts support
+arm boot-loader 
+gpio driver for bbb
+print color (printc) that prints text with color attributes
+make docs (gdt) (vga) (partially done)

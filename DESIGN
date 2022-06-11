@@ -2,8 +2,8 @@ PortOS will be a fast embeddable portable usable secure small hybird elf kernel 
 
 It will follow the System V ABI, and mostly be posix compilant to the extend that porting software becomes easier.
 
-the bootloader will follow boothowto from netbsd. (probably mimic how netbsd boots)
+the bootloader will be simple as possible
 
-
-
-inspirations: netbsd, lk, openbsd, plan9/9front, linux
+the memory model will use virtual address space paging on mmu systems and on mmu-less 
+ 
+inspirations: {net, open, 4.4}bsd, lk, linux, toaruos, minix, xv6
