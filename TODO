@@ -7,4 +7,4 @@ interrupts support
 arm boot-loader 
 gpio driver for bbb
 print color (printc) that prints text with color attributes
-make docs (gdt) (vga) (partially done)
+make docs (vga) (design) (partially done)
