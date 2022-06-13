@@ -7,18 +7,18 @@
 #define MAX_ROWS 25		/* lines */
 #define MAX_COLS 80
 
-void		consinit_helper(void);
-void		underline_cursor(uint8_t cursor_start, uint8_t cursor_end);
-void		update_cursor(int y, int x);
-void		scroll_helper(int, int);
-void		write(char c, uint8_t color, unsigned int y, unsigned int x);
+void	consinit_helper(void);
+void	underline_cursor(uint8_t cursor_start, uint8_t cursor_end);
+void	update_cursor(int y, int x);
+void	scroll_helper(int, int);
+void	write(char c, uint8_t color, unsigned int y, unsigned int x);
 
-uint16_t       *cons;
+uint16_t *cons;
 
 void
 consinit_helper(void)
 {
-	int		j = 0;
+	int	j = 0;
 	cons = cons_buf;
 
 	/* there are 25 lines each of 80 columns; each element takes 2 bytes */

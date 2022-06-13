@@ -6,7 +6,7 @@ extern void	HLT(void);
 int
 main(void)
 {
-	const char     *welcome = "Welcome to PortOS!";
+	const char *welcome = "Welcome to PortOS!";
 	consinit();
 	printf("starting init process...\n");
 	printf(welcome);

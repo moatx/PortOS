@@ -10,8 +10,8 @@ extern void	update_cursor(int y, int x);
 extern void	scroll_helper(int loc, int loc2);
 extern void	write(char c, uint8_t color, unsigned int y, unsigned int x);
 
-void		scroll(void);
-void		printf_core(const char *str, int color);
+void	scroll(void);
+void	printf_core(const char *str, int color);
 
 unsigned int	cursor_y = 0;
 unsigned int	cursor_x = 0;
@@ -28,7 +28,7 @@ consinit(void)
 void
 scroll(void)
 {
-	int		loc;
+	int	loc;
 
 	if (cursor_y >= 25) {
 		for (loc = 0 * 80; loc < 24 * 80; loc++) {
@@ -44,7 +44,7 @@ scroll(void)
 void
 underline(void)
 {
-	int		x = 0;
+	int	x = 0;
 	for (;;) {
 		update_cursor(cursor_y, x);
 		x++;
