@@ -54,24 +54,24 @@
 	* The kernel's GDT null descriptor is structured with 0 bytes
 
 	* The kernel's GDT code segment is structured as so:
-			- the code and data segment in first byte will have a base of 0x0 and a limit of 0xffff
-               		- the present bit which tells the gdt if the segment is present in memory will be set to 1
-               		- Descriptor privilege level field (privilege) bit that tells the gdt the privilege level will be set to 0 for highest privilege (for now)
-               		- the descriptor bit which is to tell the gdt if the segment is code or data will be set to 1 for code and data
-			- the executable bit will be 1 for code
-			- the direction/conforming bit is set to 0 because the kernel only wants itself to be ran in privilege level 0
-			- the readable (exec?) bit is set to 1 because the kernel wants it's code to be executed
-			- the writeable bit is set to 0 because the kernel doesnt want it's code to be writable
-			- the accessed bit is set to 0 because it hasnt been accessed yet and its best left to the cpu to set this bit
-			- the granularity bit indicates the size the limit value is scaled by and its set to 1 so the limit becomes KiB blocks (page granularity)???????????
-			- the size bit is set to 1 because the kernel wants it to be 32 bits protected mode segment
-			- the long mode flag bit is set to 0 because the kernel will stay in protected mode (for now)
+	- the code and data segment in first byte will have a base of 0x0 and a limit of 0xffff
+	- the present bit which tells the gdt if the segment is present in memory will be set to 1
+	- Descriptor privilege level field (privilege) bit that tells the gdt the privilege level will be set to 0 for highest privilege (for now)
+	- the descriptor bit which is to tell the gdt if the segment is code or data will be set to 1 for code and data
+	- the executable bit will be 1 for code
+	- the direction/conforming bit is set to 0 because the kernel only wants itself to be ran in privilege level 0
+	- the readable (exec?) bit is set to 1 because the kernel wants it's code to be executed
+	- the writeable bit is set to 0 because the kernel doesnt want it's code to be writable
+	- the accessed bit is set to 0 because it hasnt been accessed yet and its best left to the cpu to set this bit
+	- the granularity bit indicates the size the limit value is scaled by and its set to 1 so the limit becomes KiB blocks (page granularity)???????????
+	- the size bit is set to 1 because the kernel wants it to be 32 bits protected mode segment
+	- the long mode flag bit is set to 0 because the kernel will stay in protected mode (for now)
 
 	* The kernel's GDT data segment is structured the as the code segment but with:
-			- the executable bit set to 0 for data
-			- the direction/conforming bit set to 0 so the segment grows up (remember its data)
-			- the readable bit set to 0
-			- the writeable bit set to 1
+	- the executable bit set to 0 for data
+	- the direction/conforming bit set to 0 so the segment grows up (remember its data)
+	- the readable bit set to 0
+	- the writeable bit set to 1
 
 4. switch on the cr0 bit
 	* Cr0 is the control register which controls whether or not protected mode (32 bits) is enabled or not on the CPU. The boot-loader wants to get to protected mode for 32 bits and so it switches it on.
