@@ -1,4 +1,4 @@
-/*	$NetBSD: stdarg.h,v 1.5 2020/03/20 01:06:11 joerg Exp $	*/
+/* $NetBSD: stdarg.h,v 1.5 2020/03/20 01:06:11 joerg Exp $	*/
 
 /*-
  * Copyright (c) 1991, 1993
@@ -39,7 +39,7 @@ typedef char *__va_list;
 #define __builtin_next_arg(t)		((t) ? 0 : 0)
 #define	__builtin_va_start(a, l)	((a) = (va_list)(void *)&(l))
 #define	__builtin_va_arg(a, t)		((a) ? (t) 0 : (t) 0)
-#define	__builtin_va_end(a)		/* nothing */
+#define	__builtin_va_end(a)	/* nothing */
 #define	__builtin_va_copy(d, s)		((d) = (s))
 
 #ifndef __VA_LIST_DECLARED
@@ -53,4 +53,4 @@ typedef __va_list va_list;
 #define	__va_copy(dest, src)	__builtin_va_copy((dest), (src))
 #define	va_copy(dest, src)	__va_copy((dest), (src))
 
-#endif /* _STDARG_H_ */
+#endif				/* _STDARG_H_ */

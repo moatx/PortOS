@@ -78,8 +78,8 @@ printf_core(const char *str, int color)
 			cursor_x = 0;
 		} else if (str[l] >= ' ') {
 			/*
-			 * XXX: need to increment cursor_x in place so cursor
-			 * goes ahead before actually writing?
+			 * write needs to increment cursor_x in place so
+			 * cursor goes ahead before actually writing
 			 */
 			write(str[l], color, cursor_y, ++cursor_x);
 		}
