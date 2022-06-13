@@ -13,9 +13,11 @@ Building
 You can cross-build PortOS (if you have the neccesary tooling) from most UNIX-like operating systems using build.sh with the help of makefiles.
 
 to build using build.sh:
+
 	./build.sh -h
 
 to build for i386 as an example:
+
 	./build.sh i386
 
 LICENSE 
