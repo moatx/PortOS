@@ -10,11 +10,11 @@ extern void	update_cursor(int y, int x);
 extern void	scroll_helper(int loc, int loc2);
 extern void	write(char c, uint8_t color, unsigned int y, unsigned int x);
 
-void	scroll(void);
-void	printf_core(const char *str, int color);
+void		scroll(void);
+void		printf_core(const char *str, int color);
 
-unsigned int cursor_y = 0;
-unsigned int cursor_x = 0;
+unsigned int	cursor_y = 0;
+unsigned int	cursor_x = 0;
 
 void
 consinit(void)
@@ -28,7 +28,7 @@ consinit(void)
 void
 scroll(void)
 {
-	int loc;
+	int		loc;
 
 	if (cursor_y >= 25) {
 		for (loc = 0 * 80; loc < 24 * 80; loc++) {
@@ -44,7 +44,7 @@ scroll(void)
 void
 underline(void)
 {
-	int x = 0;
+	int		x = 0;
 	for (;;) {
 		update_cursor(cursor_y, x);
 		x++;
@@ -57,22 +57,19 @@ void
 printf(const char *fmt)
 {
 	/*
-	if (cursor_x >= 80) {
-		cursor_x = 0;
-		cursor_y++;
-	}
-	*/
+	 * if (cursor_x >= 80) { cursor_x = 0; cursor_y++; }
+	 */
 	printf_core(fmt, black);
 	update_cursor(cursor_y, cursor_x);
 	/*
-	scroll();
-	*/
+	 * scroll();
+	 */
 }
 
 void
 printf_core(const char *str, int color)
 {
-	unsigned int l = 0;
+	unsigned int	l = 0;
 	while (str[l] != '\0') {
 		if (str[l] == '\n') {
 			cursor_x = 0;
@@ -80,7 +77,10 @@ printf_core(const char *str, int color)
 		} else if (str[l] == '\r') {
 			cursor_x = 0;
 		} else if (str[l] >= ' ') {
-			/* XXX: need to increment cursor_x in place so cursor goes ahead before actually writing? */
+			/*
+			 * XXX: need to increment cursor_x in place so cursor
+			 * goes ahead before actually writing?
+			 */
 			write(str[l], color, cursor_y, ++cursor_x);
 		}
 		++l;

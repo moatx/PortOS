@@ -1,4 +1,4 @@
-HEAD := "$(PWD)"
+#HEAD := "$(PWD)"
 
 TOOLPREFIX := i386-elf-
 

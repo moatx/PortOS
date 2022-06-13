@@ -9,10 +9,9 @@ bin:
 
 
 img: 
-	dd if=/dev/zero of=PortOS.img count=10000
-	dd if=$(OBJDIR)/boot.bin of=PortOS.img conv=notrunc
-	dd if=$(OBJDIR)/kernel.bin of=PortOS.img seek=1 conv=notrunc
-	echo $(HEAD)
+	@dd if=/dev/zero of=PortOS.img count=10000 2>/dev/null 1>/dev/null
+	@dd if=$(OBJDIR)/boot.bin of=PortOS.img conv=notrunc 2>/dev/null 1>/dev/null
+	@dd if=$(OBJDIR)/kernel.bin of=PortOS.img seek=1 conv=notrunc 2>/dev/null 1>/dev/null
 
 
 indent:

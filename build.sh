@@ -22,27 +22,26 @@ makeobjdir() {
 	[ -n "${check_dir}" ] && rm -r "${oarg}"
 	[ ! -d "${oarg}" ] && mkdir "${oarg}"
 	OBJDIR=$(readlink -f "${oarg}")
-	echo "${OBJDIR}"
-	echo
+	echo "OBJDIR = ${OBJDIR}"
 }
 
 build_i386() {
 	make clean
-	make -C arch/i386 OBJDIR="${OBJDIR}" ARCH=i386
-	if [ "${garg}" -eq 1 ]; then
-		make -C kern grub OBJDIR="${OBJDIR}" ARCH=i386
+	make -C arch/i386 OBJDIR="${OBJDIR}" ARCH=i386 1>/dev/null
+	if [ -n "${garg}" ]; then
+		make -C kern grub OBJDIR="${OBJDIR}" ARCH=i386 1>/dev/null
 	else
-		make -C kern OBJDIR="${OBJDIR}" ARCH=i386
-		make OBJDIR="${OBJDIR}"
+		make -C kern OBJDIR="${OBJDIR}" ARCH=i386 1>/dev/null
+		make OBJDIR="${OBJDIR}" 1>/dev/null
 	fi
 }
 
 makeisogrub() {
-	mkdir -p isodir/boot/grub
+	mkdir -p isodir/boot/grub 
 	cp "${OBJDIR}"/kernel.bin isodir/boot
 	# support i386 for now
 	cp arch/i386/boot/grub.cfg isodir/boot/grub
-	grub-mkrescue -o PortOS.iso isodir
+	grub-mkrescue -o PortOS.iso isodir 2>/dev/null
 	rm -r isodir
 }
 
@@ -87,9 +86,11 @@ main() {
 	# clean up
 	rm -r "${oarg}"
 
+	echo
 	echo "#############################################################################"
-
+	echo
 	echo "dont forget to make clean"
+	echo
 }
 
 main "$@"

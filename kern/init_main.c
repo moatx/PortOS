@@ -1,12 +1,12 @@
 #include <console.h>
 
-extern void HLT(void);
+extern void	HLT(void);
 
 /* XXX return int, so gcc -Werror won't complain */
 int
 main(void)
 {
-	const char *welcome = "Welcome to PortOS!";
+	const char     *welcome = "Welcome to PortOS!";
 	consinit();
 	printf("starting init process...\n");
 	printf(welcome);
