@@ -17,9 +17,9 @@ _usage_
 }
 
 makeobjdir() {
-	#check_dir="$(ls -A "${oarg}" 2>/dev/null)"
+	check_dir="$(ls -A "${oarg}" 2>/dev/null)"
 	[ -z "${oarg}" ] && usage && exit 1
-	#[ -n "${check_dir}" ] && rm -r "${oarg}"
+	[ -n "${check_dir}" ] && rm -r "${oarg}"
 	[ ! -d "${oarg}" ] && mkdir "${oarg}"
 	OBJDIR=$(readlink -f "${oarg}")
 	echo "${OBJDIR}"
@@ -30,10 +30,10 @@ build_i386() {
 	make clean
 	make -C arch/i386 OBJDIR="${OBJDIR}" ARCH=i386
 	if [ "${garg}" -eq 1 ]; then
-	make -C kern grub OBJDIR="${OBJDIR}" ARCH=i386
+		make -C kern grub OBJDIR="${OBJDIR}" ARCH=i386
 	else
-	make -C kern OBJDIR="${OBJDIR}" ARCH=i386
-	make OBJDIR="${OBJDIR}"
+		make -C kern OBJDIR="${OBJDIR}" ARCH=i386
+		make OBJDIR="${OBJDIR}"
 	fi
 }
 
@@ -56,8 +56,8 @@ main() {
 			echo "oarg = ${oarg} (${OPTARG})"
 			;;
 		g) garg=1 ;;
-		h) usage && exit;;
-		*) usage && exit 1;;
+		h) usage && exit ;;
+		*) usage && exit 1 ;;
 		esac
 	done
 	shift $((OPTIND - 1))

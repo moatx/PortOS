@@ -2,7 +2,7 @@ include ../config.mk
 
 all:
 	$(CC) $(CFLAGS) -D $(ARCH) -I ../include -c subr_cons.c -o $(OBJDIR)/cons.o
-	$(CC) $(CFLAGS) -I ../include -c init_main.c -o $(OBJDIR)/init_main.o
+	$(CC) $(CFLAGS) -I ../include -c init_main.c  -o $(OBJDIR)/init_main.o 
 	$(AS) -c $(HEAD)/arch/$(ARCH)/boot/entry.S -o $(OBJDIR)/entry.o
 	$(LD) -s -o $(OBJDIR)/kernel.bin -Ttext 0x1000 $(OBJDIR)/entry.o $(OBJDIR)/cons.o $(OBJDIR)/cpu_console.o $(OBJDIR)/cpu.o $(OBJDIR)/init_main.o --oformat binary
 

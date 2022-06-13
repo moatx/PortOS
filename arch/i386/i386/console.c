@@ -8,6 +8,7 @@
 #define MAX_COLS 80
 
 void	consinit_helper(void);
+void	underline_cursor(uint8_t cursor_start, uint8_t cursor_end);
 void	update_cursor(int y, int x);
 void	scroll_helper(int, int);
 void	write(char c, uint8_t color, unsigned int y, unsigned int x);
@@ -26,6 +27,15 @@ consinit_helper(void)
 		cons[j + 1] = black;
 		j = j + 2;
 	}
+}
+
+void
+underline_cursor(uint8_t cursor_start, uint8_t cursor_end)
+{
+	outb(0x3D4, 0x0A);
+	outb(0x3D5, (inb(0x3D5) & 0xC0) | cursor_start); /* high */
+	outb(0x3D4, 0x0B);
+	outb(0x3D5, (inb(0x3D5) & 0xE0) | cursor_end); /* low */
 }
 
 void

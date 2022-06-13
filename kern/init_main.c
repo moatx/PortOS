@@ -1,16 +1,20 @@
 #include <console.h>
 
+extern void HLT(void);
+
 /* XXX return int, so gcc -Werror won't complain */
 int
 main(void)
 {
+	const char *welcome = "Welcome to PortOS!";
 	consinit();
 	printf("starting init process...\n");
-	printf("Welcome to PortOS!\n");
-	printf("This is a test :)");
+	printf(welcome);
 	/* infinte loop to not return */
-	for (;;)
-		;
+	for (;;) {
+		underline();
+		HLT();
+	}
 
 	/* NOTREACHED */
 }

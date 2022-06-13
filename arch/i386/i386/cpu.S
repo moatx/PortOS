@@ -1,7 +1,10 @@
 .section .text
 .global outb
 .global inb
+.global HLT
+/*
 .global insl
+*/
 
 outb:
   push   %ebp
@@ -20,6 +23,11 @@ inb:
   pop    %ebp
   ret
 
+HLT:
+   hlt 
+   ret
+
+/*
 insl:
   push   %ebp
   mov    %esp,%ebp
@@ -29,3 +37,4 @@ insl:
   cld
   repnz insl (%dx),%es:(%edi)
   ret
+*/
