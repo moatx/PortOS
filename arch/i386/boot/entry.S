@@ -20,13 +20,11 @@ stack_bottom:
 stack_top:
  
 .section .text
-.extern _main 
-.org 0x0
 .global _entry
-.type _entry, @function
+.extern main 
 _entry:
 	mov $stack_top, %esp
-	call _main
+	call main
 
 	/* main shouldnt return but if it does loop */
 	cli

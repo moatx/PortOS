@@ -1,3 +1,5 @@
+HEAD := "$(PWD)"
+
 TOOLPREFIX := i386-elf-
 
 CC := $(TOOLPREFIX)gcc

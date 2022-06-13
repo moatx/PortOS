@@ -8,8 +8,6 @@
 #define MAX_COLS 80
 
 void	consinit_helper(void);
-void	disable_cursor(void);
-void	enable_cursor(uint8_t, uint8_t);
 void	update_cursor(int y, int x);
 void	scroll_helper(int, int);
 void	write(char c, uint8_t color, unsigned int y, unsigned int x);
@@ -31,25 +29,9 @@ consinit_helper(void)
 }
 
 void
-disable_cursor(void)
-{
-	outb(0x3D4, 0x0A);
-	outb(0x3D5, 0x20);
-}
-
-void
-enable_cursor(uint8_t cursor_start, uint8_t cursor_end)
-{
-	outb(0x3D4, 0x0A);
-	outb(0x3D5, (inb(0x3D5) & 0xC0) | cursor_start);
-	outb(0x3D4, 0x0B);
-	outb(0x3D5, (inb(0x3D5) & 0xE0) | cursor_end);
-}
-
-void
 update_cursor(int y, int x)
 {
-	uint16_t pos = y * 80 + x;
+	uint16_t pos = y * MAX_COLS + x;
 	outb(0x3D4, 14);
 	outb(0x3D5, pos >> 8);	/* high byte */
 	outb(0x3D4, 15);

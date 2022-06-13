@@ -5,8 +5,6 @@
 #define black 0x07
 
 extern void	consinit_helper(void);
-extern void	disable_cursor(void);
-extern void	enable_cursor(uint8_t cursor_start, uint8_t cursor_end);
 extern void	update_cursor(int y, int x);
 extern void	scroll_helper(int loc, int loc2);
 extern void	write(char c, uint8_t color, unsigned int y, unsigned int x);
@@ -21,8 +19,9 @@ void
 consinit(void)
 {
 	consinit_helper();
-	/* disable the cursor for now */
-	/*disable_cursor();*/
+	cursor_y = 0;
+	cursor_x = 0;
+	update_cursor(cursor_y, cursor_x);
 }
 
 void
@@ -58,8 +57,7 @@ printf_core(const char *str, int color)
 		} else if (str[l] == '\r') {
 			cursor_x = 0;
 		} else if (str[l] >= ' ') {
-			write(str[l], color, cursor_y, cursor_x);
-			++cursor_x;
+			write(str[l], color, cursor_y, ++cursor_x);
 		}
 		++l;
 	}

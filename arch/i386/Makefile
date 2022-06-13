@@ -6,9 +6,9 @@ all:
 	make -C i386
 	make -C boot
 
-#grub:
-#	make -C boot grub
-#	make -C i386
+grub:
+	make -C i386
+	make -C boot grub
 
 indent:
 	make -C i386 indent

@@ -14,13 +14,12 @@ Options:
 	-o directory	Output object files to a directory
 	-g grub		Use the grub boot-loader (only for the i386 port)
 _usage_
-	exit 1
 }
 
 makeobjdir() {
-	check_dir="$(ls -A "${oarg}" 2>/dev/null)"
-	[ -z "${oarg}" ] && usage
-	[ -n "${check_dir}" ] && rm -r "${oarg}"
+	#check_dir="$(ls -A "${oarg}" 2>/dev/null)"
+	[ -z "${oarg}" ] && usage && exit 1
+	#[ -n "${check_dir}" ] && rm -r "${oarg}"
 	[ ! -d "${oarg}" ] && mkdir "${oarg}"
 	OBJDIR=$(readlink -f "${oarg}")
 	echo "${OBJDIR}"
@@ -29,26 +28,36 @@ makeobjdir() {
 
 build_i386() {
 	make clean
-	#if [ "${garg}" -eq 1 ]; then
-	#	make -C arch/i386 grub OBJDIR="${OBJDIR}" ARCH=i386
-	#else
-	#fi
 	make -C arch/i386 OBJDIR="${OBJDIR}" ARCH=i386
+	if [ "${garg}" -eq 1 ]; then
+	make -C kern grub OBJDIR="${OBJDIR}" ARCH=i386
+	else
 	make -C kern OBJDIR="${OBJDIR}" ARCH=i386
 	make OBJDIR="${OBJDIR}"
+	fi
+}
+
+makeisogrub() {
+	mkdir -p isodir/boot/grub
+	cp "${OBJDIR}"/kernel.bin isodir/boot
+	# support i386 for now
+	cp arch/i386/boot/grub.cfg isodir/boot/grub
+	grub-mkrescue -o PortOS.iso isodir
+	rm -r isodir
 }
 
 main() {
-	[ -z "$1" ] && usage
+	[ -z "$1" ] && usage && exit
 
-	while getopts go: args; do
+	while getopts gho: args; do
 		case ${args} in
 		o)
 			oarg="${OPTARG}"
 			echo "oarg = ${oarg} (${OPTARG})"
 			;;
 		g) garg=1 ;;
-		*) usage ;;
+		h) usage && exit;;
+		*) usage && exit 1;;
 		esac
 	done
 	shift $((OPTIND - 1))
@@ -69,9 +78,11 @@ main() {
 		build_i386
 		;;
 	*)
-		usage
+		usage && exit 1
 		;;
 	esac
+
+	[ -n "${garg}" ] && makeisogrub
 
 	# clean up
 	rm -r "${oarg}"

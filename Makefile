@@ -2,10 +2,17 @@
 
 include config.mk
 
-all: 
+all: bin img
+
+bin:
+	cat $(OBJDIR)/boot.bin $(OBJDIR)/kernel.bin > PortOS.bin
+
+
+img: 
 	dd if=/dev/zero of=PortOS.img count=10000
-	dd if=$(OBJDIR)/bootblock of=PortOS.img conv=notrunc
-	dd if=$(OBJDIR)/kernel of=PortOS.img seek=1 conv=notrunc
+	dd if=$(OBJDIR)/boot.bin of=PortOS.img conv=notrunc
+	dd if=$(OBJDIR)/kernel.bin of=PortOS.img seek=1 conv=notrunc
+	echo $(HEAD)
 
 
 indent:
@@ -16,9 +23,9 @@ test:
 	./build.sh i386
 	qemu-system-i386                                 \
     	-serial stdio                                  \
-  	-drive format=raw,file=PortOS.img 	
+  	-drive format=raw,file=PortOS.bin 	
 #-no-reboot                                     \
 
-.PHONY: clean all knfmt test
+.PHONY: all bin img indent test clean 
 clean:
-	@rm -f PortOS.img
+	@rm -f PortOS.img PortOS.bin PortOS.iso

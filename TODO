@@ -1,11 +1,8 @@
-fix cursor bug
-use a linker script
 implement scrolling
 add VA to printf
 make printf be able to print ints after VA
 enable the A20 line with a better way and document it (also document more about how the a20 line works)
 serial driver for debugging
-multi-boot support (grub)
 interrupts support
 arm boot-loader 
 gpio driver for bbb
