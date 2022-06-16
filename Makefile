@@ -20,9 +20,9 @@ indent:
 
 test:
 	./build.sh i386
-	qemu-system-i386                                 \
-    	-serial stdio                                  \
-  	-drive format=raw,file=PortOS.bin 	
+	qemu-system-i386 -s\
+    	-serial stdio \
+  	-drive format=raw,file=PortOS.bin &
 #-no-reboot                                     \
 
 .PHONY: all bin img indent test clean 

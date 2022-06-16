@@ -8,3 +8,4 @@ arm boot-loader
 gpio driver for bbb
 print color (printc) that prints text with color attributes
 make docs (vga) (design) (partially done)
+make it run in attiny85 with sboot?

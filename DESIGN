@@ -7,5 +7,7 @@ It will follow the System V ABI, and mostly be posix compilant to the extend tha
 the bootloader will be simple if possible 
 
 the memory model will use virtual address space paging on mmu systems
+
+mmu stuff and security in user space
  
 inspirations: {net, open, 4.4}bsd, lk, linux, toaruos, minix, xv6

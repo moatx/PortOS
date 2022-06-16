@@ -1,6 +1,6 @@
 #include <console.h>
 
-extern void	HLT(void);
+extern void HLT(void);
 
 /* XXX return int, so gcc -Werror won't complain */
 int
