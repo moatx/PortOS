@@ -3,14 +3,14 @@ include ../config.mk
 all:
 	$(CC) $(CFLAGS) -D $(ARCH) -I ../include -c subr_cons.c -o $(OBJDIR)/cons.o
 	$(CC) $(CFLAGS) -I ../include -c init_main.c  -o $(OBJDIR)/init_main.o 
-	$(AS) -c ../arch/$(ARCH)/boot/entry.S -o $(OBJDIR)/entry.o
+	$(AS) -c ../arch/$(ARCH)/$(ARCH)/entry.S -o $(OBJDIR)/entry.o
 	$(LD) -s -e _entry -o $(OBJDIR)/kernel.bin -Ttext 0x1000 $(OBJDIR)/entry.o $(OBJDIR)/cons.o $(OBJDIR)/cpu_console.o $(OBJDIR)/cpu.o $(OBJDIR)/init_main.o --oformat binary
 
 grub:
 	$(CC) $(CFLAGS) -D $(ARCH) -I ../include -c subr_cons.c -o $(OBJDIR)/cons.o
 	$(CC) $(CFLAGS) -I ../include -c init_main.c -o $(OBJDIR)/init_main.o
-	$(AS) -c ../arch/$(ARCH)/boot/entry.S -o $(OBJDIR)/entry.o
-	$(CC) $(CFLAGS) -T ../arch/$(ARCH)/boot/kern.ld -o $(OBJDIR)/kernel.bin -ffreestanding -nostdlib $(OBJDIR)/cons.o $(OBJDIR)/cpu_console.o $(OBJDIR)/cpu.o $(OBJDIR)/init_main.o  $(OBJDIR)/entry.o -lgcc
+	$(AS) -c ../arch/$(ARCH)/$(ARCH)/entry.S -o $(OBJDIR)/entry.o
+	$(CC) $(CFLAGS) -T ../arch/$(ARCH)/kern.ld -o $(OBJDIR)/kernel.bin -ffreestanding -nostdlib $(OBJDIR)/cons.o $(OBJDIR)/cpu_console.o $(OBJDIR)/cpu.o $(OBJDIR)/init_main.o  $(OBJDIR)/entry.o -lgcc
 
 indent:
 	indent init_main.c 

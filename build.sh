@@ -17,9 +17,9 @@ _usage_
 }
 
 makeobjdir() {
-	check_dir="$(ls -A "${oarg}" 2>/dev/null)"
+	#check_dir="$(ls -A "${oarg}" 2>/dev/null)"
 	[ -z "${oarg}" ] && usage && exit 1
-	[ -n "${check_dir}" ] && rm -r "${oarg}"
+	#[ -n "${check_dir}" ] && rm -r "${oarg}"
 	[ ! -d "${oarg}" ] && mkdir "${oarg}"
 	OBJDIR=$(readlink -f "${oarg}")
 	echo "OBJDIR = ${OBJDIR}"
@@ -31,6 +31,7 @@ build_i386() {
 	if [ -n "${garg}" ]; then
 		make -C kern grub OBJDIR="${OBJDIR}" ARCH=i386 1>/dev/null
 	else
+		make -C sboot OBJDIR="${OBJDIR}" ARCH=i386 1>/dev/null
 		make -C kern OBJDIR="${OBJDIR}" ARCH=i386 1>/dev/null
 		make OBJDIR="${OBJDIR}" 1>/dev/null
 	fi
@@ -40,12 +41,13 @@ makeisogrub() {
 	mkdir -p isodir/boot/grub 
 	cp "${OBJDIR}"/kernel.bin isodir/boot
 	# support i386 for now
-	cp arch/i386/boot/grub.cfg isodir/boot/grub
+	cp arch/i386/grub.cfg isodir/boot/grub
 	grub-mkrescue -o PortOS.iso isodir 2>/dev/null
 	rm -r isodir
 }
 
 main() {
+	set -e
 	[ -z "$1" ] && usage && exit
 
 	while getopts gho: args; do

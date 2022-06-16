@@ -1,0 +1,3 @@
+[submodule "sboot"]
+	path = sboot
+	url = git@github.com:moatx/sboot.git

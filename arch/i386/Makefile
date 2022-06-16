@@ -4,7 +4,6 @@ include ../../config.mk
 
 all:
 	make -C i386
-	make -C boot
 
 indent:
 	make -C i386 indent

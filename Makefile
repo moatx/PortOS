@@ -25,6 +25,9 @@ test:
   	-drive format=raw,file=PortOS.bin &
 #-no-reboot                                     \
 
-.PHONY: all bin img indent test clean 
+update:
+	git submodule foreach git pull
+
+.PHONY: all bin img indent test clean update
 clean:
 	@rm -f PortOS.img PortOS.bin PortOS.iso
