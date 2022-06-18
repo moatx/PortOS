@@ -9,11 +9,11 @@
 
 void consinit_helper(void);
 void underline_cursor(uint8_t cursor_start, uint8_t cursor_end);
-void update_cursor(int y, int x);
-void scroll_helper(int, int);
+void update_cursor(uint16_t y, uint16_t x);
+void scroll_helper(unsigned int, unsigned int);
 void write(char c, uint8_t color, unsigned int y, unsigned int x);
 
-uint16_t *cons;
+static uint16_t * cons;
 
 void
 consinit_helper(void)
@@ -39,7 +39,7 @@ underline_cursor(uint8_t cursor_start, uint8_t cursor_end)
 }
 
 void
-update_cursor(int y, int x)
+update_cursor(uint16_t y, uint16_t x)
 {
 	uint16_t pos = y * MAX_COLS + x;
 	outb(0x3D4, 14);
@@ -49,11 +49,11 @@ update_cursor(int y, int x)
 }
 
 void
-scroll_helper(int loc, int loc2)
+scroll_helper(unsigned int loc, unsigned int loc2)
 {
 	cons[loc] = cons[loc2];
 }
-
+/*XXX: splint complains about char not being uint16_t but uint16_t is too much; i think it needs changing */
 void
 write(char c, uint8_t color, unsigned int y, unsigned int x)
 {

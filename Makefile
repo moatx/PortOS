@@ -27,7 +27,8 @@ test:
 
 update:
 	git submodule foreach git pull
-
+#splint init_main.c -I ../include/ -strict -nolib -namechecks
+#clang -Weverything init_main.c  -I ../include/ $CFLAGS -Di386 -ferror-limit=80
 .PHONY: all bin img indent test clean update
 clean:
 	@rm -f PortOS.img PortOS.bin PortOS.iso

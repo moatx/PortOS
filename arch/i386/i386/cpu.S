@@ -6,6 +6,7 @@
 .global insl
 */
 
+/* void outb(int, int) */
 outb:
   push   %ebp
   mov    %esp, %ebp
