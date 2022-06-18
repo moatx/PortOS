@@ -23,4 +23,4 @@ to build for i386 as an example:
 LICENSE 
 -------
 
-see LICENSE 
+see [LICENSE](./LICENSE)
