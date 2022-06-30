@@ -24,9 +24,11 @@ inb:
   pop    %ebp
   ret
 
+/*
 HLT:
    hlt 
    ret
+*/
 
 /*
 insl:

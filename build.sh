@@ -19,7 +19,7 @@ _usage_
 makeobjdir() {
 	#check_dir="$(ls -A "${oarg}" 2>/dev/null)"
 	[ -z "${oarg}" ] && usage && exit 1
-	#[ -n "${check_dir}" ] && rm -r "${oarg}"
+	[ -n "$(ls -A "${oarg}" 2>/dev/null)" ] && rm -r "${oarg}"
 	[ ! -d "${oarg}" ] && mkdir "${oarg}"
 	OBJDIR=$(readlink -f "${oarg}")
 	echo "OBJDIR = ${OBJDIR}"
@@ -31,6 +31,8 @@ build_i386() {
 	if [ -n "${garg}" ]; then
 		make -C kern grub OBJDIR="${OBJDIR}" ARCH=i386 1>/dev/null
 	else
+		# update sboot to latest commit
+		[ ! -d "sboot" ] && git submodule update --recursive --remote 1>/dev/null
 		make -C sboot OBJDIR="${OBJDIR}" ARCH=i386 1>/dev/null
 		make -C kern OBJDIR="${OBJDIR}" ARCH=i386 1>/dev/null
 		make OBJDIR="${OBJDIR}" 1>/dev/null
@@ -38,7 +40,7 @@ build_i386() {
 }
 
 makeisogrub() {
-	mkdir -p isodir/boot/grub 
+	mkdir -p isodir/boot/grub
 	cp "${OBJDIR}"/kernel.bin isodir/boot
 	# support i386 for now
 	cp arch/i386/grub.cfg isodir/boot/grub
@@ -48,6 +50,7 @@ makeisogrub() {
 
 main() {
 	set -e
+	#set -eu -o
 	[ -z "$1" ] && usage && exit
 
 	while getopts gho: args; do

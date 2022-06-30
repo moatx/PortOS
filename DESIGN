@@ -1,13 +1,16 @@
-WIP
+PortOS will be a portable embeddable small operating system that can run on mmu-less systems or systems with a mmu.
 
-PortOS will be a fast embeddable portable usable secure small hybird elf kernel that can run on mmu-less systems or systems with mmu.
 
 It will follow the System V ABI, and mostly be posix compilant to the extend that porting software becomes easier.
-
-the bootloader will be simple if possible 
 
 the memory model will use virtual address space paging on mmu systems
 
 mmu stuff and security in user space
  
-inspirations: {net, open, 4.4}bsd, lk, linux, toaruos, minix, xv6
+inspirations: {net, open, 4.4}bsd, lk, linux, toaruos, minix, xv6, minix
+
+
+
+
+
+fast embeddable portable usable secure small hybird elf kernel that can run on mmu-less systems or systems with mmu.

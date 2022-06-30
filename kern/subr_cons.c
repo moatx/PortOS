@@ -1,7 +1,9 @@
 #include <console.h>
-#include <stdarg.h>
 #include <stdint.h>		/* maybe we shouldnt use stdint other than for
 				 * external declarations for portability? */
+#include <stdarg.h>
+
+
 
 #define black 0x07
 
@@ -12,7 +14,7 @@ extern void scroll_helper(unsigned int loc, unsigned int loc2);
 extern void write(char c, uint8_t color, unsigned int y, unsigned int x);
 
 void scroll(void);
-static void printf_core(const char *str, uint8_t color);
+static void printf_core(const char *str, va_list ap, uint8_t color);
 
 static uint16_t cursor_y = 0;
 static uint16_t cursor_x = 0;
@@ -53,31 +55,52 @@ underline(void)
 			x = 0;
 	}
 }
-
+/* maybe we should make this deal with va_list */
 void
-printf(const char *fmt)
+printf(const char *fmt,...)
 {
 	/* if (cursor_x >= 80) { cursor_x = 0; cursor_y++; } */
-	printf_core(fmt, black);
+	va_list ap;
+	va_start(ap, fmt);
+	printf_core(fmt, ap, black);
 	update_cursor(cursor_y, cursor_x);
+	va_end(ap);
 	/* scroll(); */
 }
 
 static void
-printf_core(const char *str, uint8_t color)
+printf_core(const char *str, va_list ap, uint8_t color)
 {
-	unsigned int l = 0;
-	while (str[l] != '\0') {
-		if (str[l] == '\n') {
-			cursor_x = 0;
-			cursor_y++;
-		} else if (str[l] == '\r') {
-			cursor_x = 0;
-		} else if (str[l] >= ' ') {
-			/* write needs to increment cursor_x in place so
-			 * cursor goes ahead before actually writing */
-			write(str[l], color, cursor_y, ++cursor_x);
+	*ap = 0;		/* NULL */
+	for (;;) {
+		for (; *str != '%' && *str; str++) {
+			if (*str == '\n') {
+				cursor_x = 0;
+				cursor_y++;
+			} else if (*str == '\r') {
+				cursor_x = 0;
+			} else if (*str >= ' ') {
+				/* write needs to increment cursor_x in place
+				 * so cursor goes ahead before actually
+				 * writing */
+				write(*str, color, cursor_y, ++cursor_x);
+			}
 		}
-		++l;
+		if (*str == 0)
+			goto done;
+
+		/* str++; *//* skip over '%' */
+/*
+reswitch: switch (*str++) {
+		  case ' ':
+		  */
+		/* ignore */
+		/* goto reswitch; case 's': while(*ap != '%' && *ap){
+		 * write(*ap, color, cursor_y, ++cursor_x); ++*ap; } break; } */
+
+
 	}
+
+done:
+	return;
 }

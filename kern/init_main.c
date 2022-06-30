@@ -13,7 +13,9 @@ main(void)
 	/* infinte loop to not return */
 	for (;;) {
 		underline();
-		HLT();
+#if defined(__i386__)
+		__asm__("hlt");
+#endif
 	}
 
 	/* NOTREACHED */
