@@ -7,6 +7,7 @@ all:
 
 indent:
 	make -C i386 indent
+	make -C include indent
 
 
 .PHONY: all indent 

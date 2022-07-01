@@ -1,4 +1,12 @@
+/*
+.file	"entry.S"
+
+#include <asm.h>
+*/
+
 .code32
+
+
 
 /* Declare constants for the multiboot header. */
 .set ALIGN,    1<<0             /* align loaded modules on page boundaries */
@@ -20,9 +28,16 @@ stack_bottom:
 stack_top:
  
 .section .text
-.global _entry
+.global entry
+
+.extern init
 .extern main 
-_entry:
+
+/*ENTRY(start)*/
+entry:
+	/* cpu init */
+	call init
+
 	mov $stack_top, %esp
 	call main
 
@@ -31,4 +46,5 @@ _entry:
 	1:
 		nop
 		jmp 1b
-.size _entry, . - _entry
+
+.size entry, . - entry

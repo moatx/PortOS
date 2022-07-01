@@ -6,6 +6,16 @@ It will follow the System V ABI, and mostly be posix compilant to the extend tha
 the memory model will use virtual address space paging on mmu systems
 
 mmu stuff and security in user space
+
+right now PortOS is just PortK
+
+PortK directories:
+	arch/		this is for md code
+	kern/		this is for mi code
+	include/	subroutines for both md and mi code
+	
+
+
  
 inspirations: {net, open, 4.4}bsd, lk, linux, toaruos, minix, xv6, minix
 

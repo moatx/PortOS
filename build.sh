@@ -32,7 +32,9 @@ build_i386() {
 		make -C kern grub OBJDIR="${OBJDIR}" ARCH=i386 1>/dev/null
 	else
 		# update sboot to latest commit
-		[ ! -d "sboot" ] && git submodule update --recursive --remote 1>/dev/null
+		#[ ! -d "sboot" ] && git submodule update --recursive --remote 1>/dev/null
+		#git clone git@github.com:moatx/sboot.git
+
 		make -C sboot OBJDIR="${OBJDIR}" ARCH=i386 1>/dev/null
 		make -C kern OBJDIR="${OBJDIR}" ARCH=i386 1>/dev/null
 		make OBJDIR="${OBJDIR}" 1>/dev/null

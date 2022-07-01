@@ -1,5 +1,5 @@
 OUTPUT_ARCH(i386)
-ENTRY(_entry)
+ENTRY(entry)
 
 SECTIONS
 {

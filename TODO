@@ -4,5 +4,4 @@ make printf be able to print ints after VA
 serial driver for debugging
 interrupts support
 gpio driver for bbb
-print color (printc) that prints text with color attributes
 make docs (vga) (design) (partially done)

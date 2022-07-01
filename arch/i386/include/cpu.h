@@ -9,4 +9,4 @@ extern uint8_t inb(int);
 extern void insl(int, void *, int);
 */
 
-#endif /* _CPU_H_ */
+#endif				/* _CPU_H_ */

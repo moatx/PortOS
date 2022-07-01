@@ -15,15 +15,19 @@ img:
 
 
 indent:
-	cd ./arch/i386 && make indent && cd ../..
-	cd ./kern && make indent && cd ..
+	make -C include indent
+	make -C kern indent
+	make -C arch/i386 indent
 
 test:
 	./build.sh i386
 	qemu-system-i386 -s\
     	-serial stdio \
   	-drive format=raw,file=PortOS.bin &
-#-no-reboot                                     \
+
+test-grub:
+	./build.sh -g i386
+	qemu-system-i386 -s PortOS.iso
 
 update:
 	#git submodule foreach git pull
@@ -33,4 +37,4 @@ update:
 .PHONY: all bin img indent test clean update
 clean:
 	@rm -f PortOS.img PortOS.bin PortOS.iso
-	@rm -rf sboot
+	#@rm -rf sboot

@@ -3,7 +3,7 @@
 
 #ifdef i386
 #include "../arch/i386/include/int_types.h"
-#endif	/* i386 */
+#endif				/* i386 */
 
 typedef __int8_t int8_t;
 typedef __uint8_t uint8_t;
