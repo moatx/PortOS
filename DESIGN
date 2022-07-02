@@ -3,9 +3,26 @@ PortOS will be a portable embeddable small operating system that can run on mmu-
 
 It will follow the System V ABI, and mostly be posix compilant to the extend that porting software becomes easier.
 
-the memory model will use virtual address space paging on mmu systems
 
-mmu stuff and security in user space
+on i386:
+	the memory model will use virtual address space paging
+	itll use Preemptive Multitasking with 5 states those states are:
+			New State: A process is created and memory is allocated for that process and then placed into the Ready State.
+
+Ready State: A process is waiting for assignment to a CPU core.
+
+Running State: The program is now running. This state can be interrupted by hardware. If it is interrupted, it will be moved off the CPU core and placed into the Ready State. Alternatively, if a program is running and requests an I/O operation, it will be placed into the Waiting State.
+
+Waiting State: A program has requested an I/O operation and has to now wait for the slow I/O device to provide the requested data. Once the I/O request is completed, the process is moved into the Ready State.
+
+Terminated State: On exit, a process is put into this state for cleanup.
+
+init system will use a port of netbsd's init system
+
+system calls will use interuppts just like linux
+
+IPC W.I.P
+
 
 right now PortOS is just PortK
 
@@ -17,10 +34,8 @@ PortK directories:
 
 
  
-inspirations: {net, open, 4.4}bsd, lk, linux, toaruos, minix, xv6, minix
+inspirations: {net, open, 4.4}bsd, lk, linux, toaruos, minix, xv6, sel4
 
 
-
-
-
-fast embeddable portable usable secure small hybird elf kernel that can run on mmu-less systems or systems with mmu.
+notes:
+applications use syscalls to communicate with hardware and hardware use signals to communicate with applications

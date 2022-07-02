@@ -1,12 +1,4 @@
-/*
-.file	"entry.S"
-
-#include <asm.h>
-*/
-
 .code32
-
-
 
 /* Declare constants for the multiboot header. */
 .set ALIGN,    1<<0             /* align loaded modules on page boundaries */
@@ -26,20 +18,22 @@
 stack_bottom:
 .skip 16384 # 16 KiB
 stack_top:
- 
 .section .text
 .global entry
 
 .extern init
-.extern main 
+/*
+.extern kmain 
+*/
 
 /*ENTRY(start)*/
 entry:
-	/* cpu init */
+	mov $stack_top, %esp
+
+	/* cpu init and calls main */
 	call init
 
-	mov $stack_top, %esp
-	call main
+	/*call kmain*/
 
 	/* main shouldnt return but if it does loop */
 	cli

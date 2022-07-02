@@ -1,7 +1,9 @@
+interuppts and trap handling
+user space support
+ipc support for drivers
 implement scrolling
 add VA to printf
 make printf be able to print ints after VA
 serial driver for debugging
-interrupts support
 gpio driver for bbb
 make docs (vga) (design) (partially done)

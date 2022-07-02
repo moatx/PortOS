@@ -3,6 +3,8 @@
 void init_gdt(void);
 void init(void);
 
+extern int main(void);
+
 static void cls(void);
 static void print(char *str);
 static unsigned int char_loc = 0;
@@ -44,7 +46,9 @@ init(void)
 {
 	cls();
 	print("initializing neccesary md gdt and idt");
-	for (;;);
+	/* XXX: I dont think init(void) should be calling main but this fixed
+	 * the bug */
+	main();
 }
 
 static void

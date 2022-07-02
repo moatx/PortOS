@@ -1,5 +1,6 @@
 #include <console.h>
 
+
 const char copyright[] =
 "Copyright (c) 2022 moatx. All rights reserved.  github.com/moatx/PortOS \n"
 "Welcome to PortOS version 0.0.0 alpha\n";
